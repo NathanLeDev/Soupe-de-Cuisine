@@ -34,3 +34,96 @@ async function fetchAndDisplayRecipes() {
 }
 
 fetchAndDisplayRecipes();
+
+const searchInput = document.querySelector('.searchbar');
+ 
+function searchRecipes(recipes, query) {
+    return recipes.filter(recipe => {
+        const lowerCaseQuery = query.toLowerCase();
+ 
+        return (
+            recipe.name.toLowerCase().includes(lowerCaseQuery) ||
+            recipe.description.toLowerCase().includes(lowerCaseQuery) ||
+            recipe.ingredients.some(ing => ing.ingredient.toLowerCase().includes(lowerCaseQuery))
+        );
+    });
+}
+ 
+function displayNoResultsMessage(container, query) {
+    container.innerHTML = `
+        <p>Aucune recette ne contient '${query}'. Vous pouvez chercher par exemple «tarte aux pommes», «poisson», etc.</p>
+    `;
+}
+ 
+async function setupSearchFeature() {
+    try {
+        const response = await fetch(recipeDataUrl);
+        const recipes = await response.json();
+ 
+        const recipeContainer = document.querySelector('.grid-recette');
+ 
+        function displayAllRecipes() {
+            recipeContainer.innerHTML = '';
+            recipes.forEach(recipe => {
+                const recipeCard = document.createElement('div');
+                recipeCard.classList.add('card-recette');
+ 
+                recipeCard.innerHTML = `
+                    <img class="img-recette" src="images/JSON recipes/${recipe.image}" alt="${recipe.name}">
+                    <h2>${recipe.name}</h2>
+                    <div>
+                        <h3>RECETTE</h3>
+                        <p>${recipe.description}</p>
+                    </div>
+                    <div>
+                        <h3>INGREDIENTS</h3>
+                        <p>${recipe.ingredients.map(ing => `${ing.quantity || ''} ${ing.unit || ''} ${ing.ingredient}`).join(', ')}</p>
+                    </div>
+                `;
+ 
+                recipeContainer.appendChild(recipeCard);
+            });
+        }
+ 
+        displayAllRecipes();
+ 
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim();
+ 
+            if (query.length <= 2) {
+                displayAllRecipes();
+            } else if (query.length >= 3) {
+                const filteredRecipes = searchRecipes(recipes, query);
+ 
+                if (filteredRecipes.length > 0) {
+                    recipeContainer.innerHTML = '';
+                    filteredRecipes.forEach(recipe => {
+                        const recipeCard = document.createElement('div');
+                        recipeCard.classList.add('card-recette');
+ 
+                        recipeCard.innerHTML = `
+                            <img class="img-recette" src="images/JSON recipes/${recipe.image}" alt="${recipe.name}">
+                            <h2>${recipe.name}</h2>
+                            <div>
+                                <h3>RECETTE</h3>
+                                <p>${recipe.description}</p>
+                            </div>
+                            <div>
+                                <h3>INGREDIENTS</h3>
+                                <p>${recipe.ingredients.map(ing => `${ing.quantity || ''} ${ing.unit || ''} ${ing.ingredient}`).join(', ')}</p>
+                            </div>
+                        `;
+ 
+                        recipeContainer.appendChild(recipeCard);
+                    });
+                } else {
+                    displayNoResultsMessage(recipeContainer, query);
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Erreur lors de la configuration de la recherche :", error);
+    }
+}
+ 
+setupSearchFeature();
