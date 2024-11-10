@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+}
+
+.img-accueil{
+    width: 100%;
+    filter: brightness(0.4);
+}
+
+h1{
+    color: yellow;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: -30%;
+    font-size: 200%;
+}
+
+.div-search {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}
+
+.searchbar{
+    width: 80%;
+    height: 70%;
+}
+
+.img-recette {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.grid-filtre{
+    margin-top: 18%;
+}
+
+.grid-recette {
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.card-recette {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s ease;
+}
+
+.card-recette:hover {
+    transform: scale(1.05);
+}
+
+.card-recette h2 {
+    margin: 16px;
+    font-size: 1.5em;
+}
+
+.card-recette h3 {
+    margin: 16px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.card-recette p {
+    margin: 16px;
+    color: #333;
+}
+
+
+@media screen and (max-width: 693px) {
+    .searchbar{
+        height: auto;
+    }
+
+    .div-search{
+        height: 5vh;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    h1{
+       font-size: 100%; 
+    }
+}
+
+@media screen and (max-width: 370px) {
+    h1{
+       font-size: 80%; 
+    }
+  }
