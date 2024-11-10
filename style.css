@@ -37,8 +37,19 @@ h1{
     display: block;
 }
 
-.grid-filtre{
+.grid-filtre {
     margin-top: 18%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.recipe-count {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
 }
 
 .grid-recette {
