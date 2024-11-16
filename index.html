@@ -15,9 +15,40 @@
         </div>
     </header>
     <section class="grid-filtre">
-            <h2>Filtres</h2>
-            <span id="recipe-count" class="recipe-count">recettes</span>
-    </section>
+        <section class="filters">
+            <div class="filter">
+                <button class="filter-button" data-filter="ingredients">Ingrédients ⌄</button>
+                <div class="filter-dropdown hidden" data-filter="ingredients">
+                    <input type="text" class="filter-search" placeholder="Rechercher un ingrédient...">
+                    <ul class="filter-list" id="ingredients-list">
+                        <!-- Liste d'ingrédients générée dynamiquement -->
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="filter">
+                <button class="filter-button" data-filter="appliances">Appareils ⌄</button>
+                <div class="filter-dropdown hidden" data-filter="appliances">
+                    <input type="text" class="filter-search" placeholder="Rechercher un appareil...">
+                    <ul class="filter-list" id="appliances-list">
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="filter">
+                <button class="filter-button" data-filter="utensils">Ustensiles ⌄</button>
+                <div class="filter-dropdown hidden" data-filter="utensils">
+                    <input type="text" class="filter-search" placeholder="Rechercher un ustensile...">
+                    <ul class="filter-list" id="utensils-list">
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="selected-filters">
+        </section>
+        <span id="recipe-count" class="recipe-count">recettes</span>
+    </section>    
     <div class="grid-recette">
     </div>
     <script src="JS/script.js"></script>
