@@ -112,7 +112,6 @@ h1{
     }
 }
 
-/* Section des filtres */
 .filters {
     display: flex;
     justify-content: space-between;
@@ -120,7 +119,6 @@ h1{
     margin: 20px 0;
 }
 
-/* Bouton des filtres */
 .filter-button {
     background-color: #f4f4f4;
     border: 1px solid #ddd;
@@ -197,4 +195,3 @@ h1{
     cursor: pointer;
     font-weight: bold;
 }
-
