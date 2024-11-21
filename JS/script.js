@@ -13,7 +13,7 @@ async function fetchAndDisplayRecipes() {
             recipeCard.classList.add('card-recette');
 
             recipeCard.innerHTML = `
-                <img class="img-recette" src="images/JSON recipes/${recipe.image}" alt="${recipe.name}">
+                <img class="img-recette" src="images/JSONrecipes/${recipe.image}" alt="${recipe.name}">
                 <h2>${recipe.name}</h2>
                 <div>
                     <h3>RECETTE</h3>
@@ -71,7 +71,7 @@ async function setupSearchFeature() {
                 recipeCard.classList.add('card-recette');
                 
                 recipeCard.innerHTML = `
-                    <img class="img-recette" src="images/JSON recipes/${recipe.image}" alt="${recipe.name}">
+                    <img class="img-recette" src="images/JSONrecipes/${recipe.image}" alt="${recipe.name}">
                     <h2>${recipe.name}</h2>
                     <div>
                         <h3>RECETTE</h3>
@@ -106,7 +106,7 @@ async function setupSearchFeature() {
                         recipeCard.classList.add('card-recette');
 
                         recipeCard.innerHTML = `
-                            <img class="img-recette" src="images/JSON recipes/${recipe.image}" alt="${recipe.name}">
+                            <img class="img-recette" src="images/JSONrecipes/${recipe.image}" alt="${recipe.name}">
                             <h2>${recipe.name}</h2>
                             <div>
                                 <h3>RECETTE</h3>
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('card-recette');
             recipeCard.innerHTML = `
-                <img src="images/JSON recipes/${recipe.image}" alt="${recipe.name}" class="img-recette">
+                <img src="images/JSONrecipes/${recipe.image}" alt="${recipe.name}" class="img-recette">
                 <h2>${recipe.name}</h2>
                 <p>Temps de préparation: ${recipe.time} min</p>
                 <p>Ingrédients: ${recipe.ingredients.map(item => item.ingredient).join(', ')}</p>
