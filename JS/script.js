@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const filters = document.querySelectorAll('.filter');
     const selectedFilters = document.querySelector('.selected-filters');
     const recipeContainer = document.querySelector('.grid-recette');
+    const searchInput = document.querySelector('.searchbar');
     let recipes = [];
     let ingredients = new Set();
     let appliances = new Set();
@@ -227,6 +228,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function filterRecipes() {
+        const query = searchInput.value.trim().toLowerCase();
+
         const selectedTags = Array.from(document.querySelectorAll('.filter-tag'));
         const selectedIngredients = selectedTags
             .filter(tag => ingredients.has(tag.getAttribute('data-value')))
@@ -240,19 +243,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             .filter(tag => utensils.has(tag.getAttribute('data-value')))
             .map(tag => tag.getAttribute('data-value'));
 
+        const searchTerms = query.split(',').map(term => term.trim()).filter(term => term.length > 0);
+
         const filteredRecipes = recipes.filter(recipe => {
+            const matchesSearchQuery = searchTerms.length === 0 || searchTerms.some(term => (
+                recipe.name.toLowerCase().includes(term) ||
+                recipe.description.toLowerCase().includes(term) ||
+                recipe.ingredients.some(ing => ing.ingredient.toLowerCase().includes(term))
+            ));
+
             const hasIngredients = selectedIngredients.every(ingredient =>
                 recipe.ingredients.some(item => item.ingredient === ingredient)
             );
             const hasAppliance = selectedAppliances.length === 0 || selectedAppliances.includes(recipe.appliance);
             const hasUtensils = selectedUtensils.every(utensil => recipe.ustensils.includes(utensil));
 
-            return hasIngredients && hasAppliance && hasUtensils;
+            return matchesSearchQuery && hasIngredients && hasAppliance && hasUtensils;
         });
 
         extractFilters(filteredRecipes);
         updateFilterLists();
         displayRecipes(filteredRecipes);
+        updateRecipeCount(filteredRecipes.length);
     }
 
     function updateFilterLists() {
@@ -334,6 +346,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
+    searchInput.addEventListener('input', () => {
+        filterRecipes();
+    });
+
     recipes = await fetchRecipes();
     extractFilters(recipes);
 
@@ -342,4 +358,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     populateFilterList('utensils-list', Array.from(utensils));
 
     displayRecipes(recipes);
+    updateRecipeCount(recipes.length);
 });
