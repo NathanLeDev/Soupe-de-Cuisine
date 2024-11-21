@@ -8,14 +8,14 @@
 </head>
 <body>
     <header>
-        <img class="img-accueil" src="images/JSON recipes/accueil.jpg.png" alt="image d'accueil">
+        <img class="img-accueil" src="images/JSONrecipes/accueil.png" alt="image d'accueil">
         <h1>CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET GENEREUSES</h1>
         <div class="div-search">
-            <input class="searchbar" type="search" id="site-search" name="q" placeholder=" Recherchez une recette, un ingrédient..."/>
+            <input class="searchbar" type="search" id="site-search" name="q" placeholder=" Recherchez une recette, un ingrédient...">
         </div>
     </header>
-    <section class="grid-filtre">
-        <section class="filters">
+    <div class="grid-filtre">
+        <div class="filters">
             <div class="filter">
                 <button class="filter-button" data-filter="ingredients">Ingrédients ⌄</button>
                 <div class="filter-dropdown hidden" data-filter="ingredients">
@@ -43,12 +43,12 @@
                     </ul>
                 </div>
             </div>
-        </section>
+        </div>
         
-        <section class="selected-filters">
-        </section>
+        <div class="selected-filters">
+        </div>
         <span id="recipe-count" class="recipe-count">recettes</span>
-    </section>    
+    </div>    
     <div class="grid-recette">
     </div>
     <script src="JS/script.js"></script>
