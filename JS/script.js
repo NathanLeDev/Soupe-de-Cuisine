@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const data = await response.json();
         return data;
     }
+
     function closeAllDropdowns() {
         const dropdowns = document.querySelectorAll('.filter-dropdown');
         dropdowns.forEach(dropdown => {
@@ -193,6 +194,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     function extractFilters(recipes) {
+        ingredients.clear();
+        appliances.clear();
+        utensils.clear();
+
         recipes.forEach(recipe => {
             recipe.ingredients.forEach(item => ingredients.add(item.ingredient));
             appliances.add(recipe.appliance);
@@ -245,7 +250,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             return hasIngredients && hasAppliance && hasUtensils;
         });
 
+        extractFilters(filteredRecipes);
+        updateFilterLists();
         displayRecipes(filteredRecipes);
+    }
+
+    function updateFilterLists() {
+        populateFilterList('ingredients-list', Array.from(ingredients));
+        populateFilterList('appliances-list', Array.from(appliances));
+        populateFilterList('utensils-list', Array.from(utensils));
     }
 
     function populateFilterList(listId, items) {
@@ -256,8 +269,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             li.textContent = item;
             li.classList.add('filter-item');
             li.setAttribute('data-value', item);
-            li.addEventListener('click', () => selectFilter(item, listId));
-            list.appendChild(li);
+
+            const existingTag = document.querySelector(`.filter-tag[data-value="${item}"]`);
+            if (!existingTag) {
+                li.addEventListener('click', () => selectFilter(item, listId));
+                list.appendChild(li);
+            }
         });
     }
 
