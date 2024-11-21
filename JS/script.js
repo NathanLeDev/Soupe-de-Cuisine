@@ -134,6 +134,28 @@ async function setupSearchFeature() {
 
 setupSearchFeature();
 
+function searchRecipes(recipes, query) {
+    const terms = query.split(',').map(term => term.trim().toLowerCase());
+
+    return recipes.filter(recipe => {
+        return terms.some(term => {
+            const inName = recipe.name.toLowerCase().includes(term);
+
+            const inDescription = recipe.description.toLowerCase().includes(term);
+
+            const inIngredients = recipe.ingredients.some(ing => ing.ingredient.toLowerCase().includes(term));
+
+            return inName || inDescription || inIngredients;
+        });
+    });
+}
+
+function displayNoResultsMessage(container, query) {
+    container.innerHTML = `
+        <p>Aucune recette ne contient '${query}'. Essayez une recherche différente.</p>
+    `;
+}
+
 function updateRecipeCount(count) {
     const recipeCountElement = document.getElementById('recipe-count');
     recipeCountElement.textContent = `${count} recette${count > 1 ? 's' : ''}`;
