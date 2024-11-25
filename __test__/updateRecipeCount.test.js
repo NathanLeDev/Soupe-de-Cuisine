@@ -1,4 +1,4 @@
-import { updateRecipeCount } from "../JS/script.js";
+const { updateRecipeCount } = require("../JS/script.js");
 
 describe("updateRecipeCount", () => {
     beforeEach(() => {
