@@ -56,28 +56,39 @@ export function displayRecipes(filteredRecipes, updateCount = updateRecipeCount)
         recipeContainer.innerHTML =
             "<p>Aucune recette ne correspond aux filtres sélectionnés.</p>";
         updateCount(0);
-        console.log("updateRecipeCount called with 0");
         return;
     }
 
     filteredRecipes.forEach((recipe) => {
         const recipeCard = document.createElement("div");
         recipeCard.classList.add("card-recette");
+
         recipeCard.innerHTML = `
             <img src="images/JSONrecipes/${recipe.image}" alt="${recipe.name}" class="img-recette">
-            <h2>${recipe.name}</h2>
-            <p>Temps de préparation: ${recipe.time} min</p>
-            <p>Ingrédients: ${recipe.ingredients
-                .map((item) => item.ingredient)
-                .join(", ")}</p>
-            <p>Appareil: ${recipe.appliance}</p>
-            <p>Ustensiles: ${recipe.ustensils.join(", ")}</p>
+            <div class="card-recette-content">
+                <h2>${recipe.name}</h2>
+                <h3>Recette</h3>
+                <p>${recipe.description}</p>
+                <h3>Ingrédients</h3>
+                <div class="ingredients-grid">
+                    ${recipe.ingredients
+                        .map(
+                            (item) => `
+                            <div class="ingredient-item">
+                                <span class="ingredient-name">${item.ingredient}</span>
+                                <span class="ingredient-quantity">${item.quantity || ""} ${item.unit || ""}</span>
+                            </div>
+                        `
+                        )
+                        .join("")}
+                </div>
+            </div>
         `;
+
         recipeContainer.appendChild(recipeCard);
     });
 
     updateCount(filteredRecipes.length);
-    console.log(`updateRecipeCount called with ${filteredRecipes.length}`);
 }
 
 function filterRecipes() {
