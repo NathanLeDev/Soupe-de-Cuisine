@@ -9,7 +9,7 @@ const recipeContainer = document.querySelector(".grid-recette");
 const searchInput = document.querySelector(".searchbar");
 const selectedFilters = document.querySelector(".selected-filters");
 
-async function fetchRecipes() {
+export async function fetchRecipes() {
     const response = await fetch(recipeDataUrl);
     return response.json();
 }
@@ -42,13 +42,21 @@ function extractFilters(recipes) {
     });
 }
 
-function displayRecipes(filteredRecipes) {
+export function displayRecipes(filteredRecipes, updateCount = updateRecipeCount) {
+    const recipeContainer = document.querySelector(".grid-recette");
+
+    if (!recipeContainer) {
+        console.error("L'élément .grid-recette est introuvable.");
+        return;
+    }
+
     recipeContainer.innerHTML = "";
 
     if (filteredRecipes.length === 0) {
         recipeContainer.innerHTML =
             "<p>Aucune recette ne correspond aux filtres sélectionnés.</p>";
-        updateRecipeCount(0);
+        updateCount(0);
+        console.log("updateRecipeCount called with 0");
         return;
     }
 
@@ -68,7 +76,8 @@ function displayRecipes(filteredRecipes) {
         recipeContainer.appendChild(recipeCard);
     });
 
-    updateRecipeCount(filteredRecipes.length);
+    updateCount(filteredRecipes.length);
+    console.log(`updateRecipeCount called with ${filteredRecipes.length}`);
 }
 
 function filterRecipes() {
