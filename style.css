@@ -33,8 +33,10 @@ h1{
 
 .img-recette {
     width: 100%;
-    height: auto;
+    height: 400px;
+    object-fit: cover;
     display: block;
+    border-bottom: 1px solid #ddd;
 }
 
 .grid-filtre {
@@ -52,6 +54,34 @@ h1{
     color: #333;
 }
 
+.recette-ingredients ul {
+    list-style-type: none;
+}
+
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.ingredient-item {
+    padding-left: 15px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.ingredient-name {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ingredient-quantity {
+    font-size: 0.85em;
+    color: #555;
+}
+
 .grid-recette {
     margin-top: 5%;
     display: grid;
@@ -67,6 +97,14 @@ h1{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     transition: transform 0.2s ease;
+}
+
+.card-recette p {
+    text-align: justify;
+}
+
+.card-recette-content {
+    padding: 16px;
 }
 
 .card-recette:hover {
