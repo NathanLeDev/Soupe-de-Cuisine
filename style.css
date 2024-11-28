@@ -186,11 +186,37 @@ h1{
     h1{
         font-size: 200%;
     }
+    .grid-filtre {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filters {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .selected-filters {
+        width: 100%;
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .selected-filters .filter-tag {
+        display: inline-flex;
+        margin-bottom: 5px;
+    }
 }
 
 @media screen and (max-width: 750px) {
     .grid-filtre{
         margin-top: 8%;
+    }
+    .filter-tag{
+        font-size: 12px;
     }
 }
 
@@ -234,6 +260,9 @@ h1{
     .filter-button {
         font-size: 8px;
         padding: 7px 5px;
+    }
+    .filter-tag{
+        font-size: 8px;
     }
 }
 
